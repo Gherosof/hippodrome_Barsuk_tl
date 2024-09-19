@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status = "debug" name = "hippodrome">
+    <Appenders>
+
+        <RollingFile name="MAIN" fileName="logs/hippodrome.log" filePattern="logs/hippodrome.%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d %p %c: %m%n"/>
+        </RollingFile>
+
+        <Policies>
+            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+        </Policies>
+
+        <DefaultRolloverStrategy>
+            <Delete basePath="${baseDir}" maxDepth="2">
+                <IfFileName glob="*/hippodrome-*.log">
+                    <IfLastModified age="P7D">
+                    </IfLastModified>
+                </IfFileName>
+            </Delete>
+        </DefaultRolloverStrategy>
+
+    </Appenders>
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="MAIN"/>
+        </Root>
+    </Loggers>
+</Configuration>
